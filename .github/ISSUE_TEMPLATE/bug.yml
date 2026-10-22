@@ -1,0 +1,92 @@
+name: Signaler un problème
+description: Erreur Lua, cadres qui disparaissent, clic qui ne lance pas le bon sort, alerte fausse
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de prendre le temps de signaler ce problème ! Plus la description est précise, plus vite il sera corrigé.
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type de problème
+      options:
+        - Erreur Lua (fenêtre d'erreur)
+        - Cadres qui disparaissent ou se placent mal
+        - Clic ou touche qui ne lance pas le bon sort
+        - Rôle faux (tank, soigneur, DPS)
+        - Dispel, débuff de boss ou alerte
+        - Fenêtre de configuration
+        - Autre
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version de VuhPlus
+      description: Affichée en haut de la fenêtre /vp et dans l'infobulle du bouton de la minicarte.
+      placeholder: "5.9.0"
+    validations:
+      required: true
+
+  - type: input
+    id: classe
+    attributes:
+      label: Classe et spé de votre personnage
+      placeholder: "Prêtre Sacré"
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Ce qui se passe
+      description: Une capture d'écran aide beaucoup.
+    validations:
+      required: true
+
+  - type: textarea
+    id: attendu
+    attributes:
+      label: Ce qui devrait se passer
+
+  - type: textarea
+    id: etapes
+    attributes:
+      label: Comment le reproduire
+      placeholder: |
+        1. Rejoindre un raid de 25…
+        2. Trier le raid par rôle…
+        3. …
+
+  - type: dropdown
+    id: situation
+    attributes:
+      label: Situation
+      options:
+        - Seul
+        - Groupe de 5
+        - Raid 10
+        - Raid 25
+        - Champ de bataille ou arène
+        - Autre
+
+  - type: textarea
+    id: erreur
+    attributes:
+      label: Message d'erreur Lua
+      description: S'il y en a un. Pour afficher les erreurs dans le jeu, tapez `/console scriptErrors 1`.
+      render: text
+
+  - type: textarea
+    id: diag
+    attributes:
+      label: Journal de diagnostic
+      description: Pour des cadres qui disparaissent ou se placent mal, joignez le journal de `/vp diag` (voir CONTRIBUTING.md).
+      render: text
+
+  - type: textarea
+    id: addons
+    attributes:
+      label: Autres addons installés
+      description: Surtout les autres cadres de raid ou d'interface (VuhDo, Grid, ElvUI…).

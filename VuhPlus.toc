@@ -1,0 +1,37 @@
+## Interface: 30300
+## Title: VuhPlus |cff33dd88(WotLK 3.3.5)|r
+## Notes: Cadres de raid modernes pour soigneurs inspirés de VuhDo : clic-soin, touches au survol, dispel, débuffs de boss, buffs, soins entrants, soin de zone, bijoux.
+## Author: BellaHealFr
+## X-License: GPL-3.0-only (voir LICENSE et NOTICE.md)
+## Version: 5.9.0
+## SavedVariables: VuhPlusDB
+## OptionalDeps: LibHealComm-4.0, LibStub, LibSharedMedia-3.0, SharedMedia, LibResComm-1.0
+
+Templates.xml
+Core.lua
+Theme.lua
+Colors.lua
+Dispel.lua
+Debuffs.lua
+Roles.lua
+Frames.lua
+Clicks.lua
+Macros.lua
+Panels.lua
+Buffs.lua
+AoE.lua
+Trinkets.lua
+LiveList.lua
+Raid.lua
+Consumables.lua
+Announce.lua
+Cooldowns.lua
+Spikes.lua
+Assign.lua
+Share.lua
+AutoProfile.lua
+Rez.lua
+Preview.lua
+Diag.lua
+Widgets.lua
+Options.lua

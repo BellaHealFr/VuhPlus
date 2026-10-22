@@ -1,0 +1,282 @@
+VuhPlus 5.9.0 - Cadres de raid pour soigneurs (WoW 3.3.5 WotLK)
+Par BellaHealFr - inspiré de VuhDo
+
+INSTALLATION
+1. Dézippez l'archive.
+2. Supprimez l'ancien dossier VuhPlus s'il existe dans Interface\AddOns\.
+3. Copiez le dossier "VuhPlus" (celui qui contient VuhPlus.toc) dans :
+   <dossier du jeu>\Interface\AddOns\
+   Résultat attendu : ...\Interface\AddOns\VuhPlus\VuhPlus.toc
+4. Désactivez VuhDo / Grid pour éviter deux cadres de raid.
+5. FACULTATIF - soins entrants : installez aussi l'addon "LibHealComm-4.0" (version 3.3.5)
+   dans Interface\AddOns\. VuhPlus le détecte tout seul.
+
+COMMANDES
+/vp                      fenêtre de configuration (aussi : bouton de la minicarte)
+/vp apercu               mode test (faux groupe) ; choix 5/10/25/40 joueurs dans la fenêtre
+/vp unlock | lock        déplacer / verrouiller (poignées au-dessus des panneaux)
+/vp reset                positions par défaut
+/vp tank [Nom]           ajoute/retire votre cible (ou Nom) de "Mes tanks"
+/vp spot [Nom]           ajoute/retire votre cible (ou Nom) du panneau "Projecteur"
+/vp cd                   afficher / cacher les recharges du raid
+/vp dispel               ce que votre personnage peut dissiper (selon sa classe, sa spé, ses sorts)
+/vp perf                 mémoire et processeur utilisés par VuhPlus
+                         (processeur : /console scriptProfile 1 puis /reload ; à remettre à 0 ensuite)
+/vp profil save Nom      enregistrer l'apparence ; load / suppr pour charger / supprimer
+/vp test                 tester l'alerte bijoux
+
+RACCOURCIS (Échap > Raccourcis > VuhPlus)
+- Utiliser les bijoux
+- Buff intelligent (lance le premier buff manquant)
+
+CLICS (/vp > Clics et touches, comme la page Sorts de VuhDo)
+1. Choisissez la touche modificatrice (Aucune, Alt, Ctrl, Maj ou une combinaison).
+2. Glissez un sort du grimoire sur Clic gauche / droit / milieu / Bouton 4 / 5 / Molette.
+   À droite s'affiche le type : Sort, Commande, Macro, Objet (rouge = sort inconnu).
+3. "Appliquer et vérifier", puis "Valider" en bas de la fenêtre ("Annuler" rétablit tout).
+Survolez un cadre en jeu : l'infobulle liste vos clics.
+Par défaut :
+Clic gauche = cibler | Ctrl+gauche = menu (promouvoir, tank principal...)
+Clic droit = soin rapide | Maj+droit = gros soin | Ctrl/Alt+droit = HoT, bouclier...
+Clic milieu = Dispel 1 | Maj+milieu = Dispel 2 | Boutons 4/5 = sorts défensifs
+Clic sur un mort hors combat = résurrection automatique (clic intelligent)
+
+LÉGENDE DES CADRES
+Bordure colorée      = affaiblissement que VOTRE classe peut dissiper (bleu magie, violet malédiction,
+                       brun maladie, vert poison) + son. Touche de dispel : /vp > Dispel.
+                       Atténué + « loin » : hors de portée de votre dispel (pas de son).
+                       « hors vue » : dispel échoué (ligne de vue), oublié quelques secondes.
+Fenêtre « À dissiper»= liste en direct des joueurs à dissiper (déplaçable une fois déverrouillé).
+Bordure orange       = mode urgence (les plus blessés)
+Teinte d'accent      = conseil de soin de zone
+Grande icône centre  = affaiblissement de boss le plus prioritaire (cumuls + durée) ; clignote s'il est critique
+                       C'est une INFORMATION, pas forcément à vous de le retirer. Bordure de l'icône :
+                       couleur du type (bleu, violet, brun, vert) = VOUS pouvez le dissiper ; orange = critique,
+                       soignez ce joueur ; grise = rien à faire. Son : seulement pour les critiques (réglable).
+                       (Empalé, Spores gazeuses, Peste libérée, Profanation...). Liste perso : « Nom = 9 » pour la priorité
+Petites icônes droite= vos HoTs : secondes restantes en haut (jaune < 6 s, rouge < 3 s),
+                       spirale de durée, charges en bas à droite
+Point jaune          = il manque un de vos buffs de groupe
+Cadre GRIS + icône   = rappel de soigneur : il vous manque un buff (Bouclier d'eau, Arme Viveterre,
+                       Feu intérieur, Sceau...) ou votre tank n'a pas le sien (Épines, Bouclier de terre
+                       à 1 charge, Guide de lumière, Bouclier sacré, Mot de pouvoir : Bouclier).
+                       La couleur revient dès que le buff est remis.
+Trait rouge en haut  = aggro
+Barre verte claire   = soins entrants (avec LibHealComm-4.0) : seulement ceux qui arrivent dans les 4 s
+                       (réglable, page Indicateurs ; option « seulement les soins des autres »)
+Fine barre bleu pâle = boucliers (Mot de pouvoir : Bouclier, Égide divine, Bouclier sacré...), en bas de la vie
+Mana orange qui pulse= soigneur à court de mana
+« +3.2k » vert        = surplus de soin (soins en cours au-delà de la vie manquante)
+Icône bord gauche    = gros défensif actif (Mur protecteur, Écorce, Suppression...) + temps
+Icône bord droit     = soins réduits (Frappe mortelle, Aura nécrotique...) + temps
+Gemme violette       = pierre d'âme
+Bordure rose         = joueur ciblé par le boss
+Flèche jaune         = direction à prendre vers un joueur hors de portée de soin (disparaît à portée)
+                       + grande flèche par-dessus le cadre survolé (ou de votre cible), comme VuhDo
+
+AFFICHAGE : chaque icône a sa propre position, son décalage X/Y et sa taille (page Placement des icônes).
+Option « Alignement automatique » : les icônes d'une même position s'alignent sans se chevaucher
+et rétrécissent si la place manque ; le nom et le texte de vie se décalent pour rester lisibles.
+
+ALERTES ET RAID (/vp > Sons et alertes, Recharges et annonces, Outils de chef)
+Aggro sur vous, tank sous X %, barre « Morts / Déco / Loin / Mana des soigneurs »,
+rapport de mort (dernier coup reçu), barre d'outils (/vp outils) : appel, pull 5/10 s, conso, symboles.
+Consommables : flacon (ou 2 élixirs) et nourriture vérifiés à chaque appel, bouton « Conso » ou /vp conso.
+FAMILIERS (/vp > Familiers) : sous le groupe de leur maître, à côté des joueurs (à droite du raid) ou en panneau séparé, nom et couleur du maître,
+                       discrets en pleine vie, seulement en combat, taille propre, dispel optionnel ; désactivables.
+                       Familiers temporaires ignorés par défaut : tréants (druide), loups esprits (chaman), ombrefiel (prêtre).
+MACROS (/vp > Macros) : bibliothèque de macros sur plusieurs lignes ; @vp (dans [ ]) et {vp} visent le joueur cliqué ;
+                       vérification, modèles par classe, import des macros du jeu, assignation à un clic (M:Nom).
+                       Dupliquer, Partager (exporter / importer en texte entre joueurs). La vérification signale les
+                       conditions mal écrites ([@vp,ded], [mod:shfit]), la longueur réelle une fois @vp remplacé, et
+                       /script, /run, /console (du code exécuté au clic : lisez les macros reçues avant de les utiliser).
+Annonces : vos gros sorts (Héroïsme, Totem de vague de mana, Renaissance...) annoncés au raid / groupe / BG, avec compte à rebours,
+                       temps de recharge et « de nouveau disponible » ; barres de temps à l'écran (aussi pour les autres soigneurs).
+
+MACROS : écrivez @vp à la place de la cible, ex. /cast [@vp] Soin rapide
+
+COULEURS (/vp > Style et couleurs ; les couleurs d'une fonction sont sur sa page)
+Débuffs (fond / texte), anomalies (mort, charme, hors-ligne, GCD), soins entrants, urgence,
+couleurs de la vie, ressources, compte à rebours et alerte d'expiration des HoTs, charges,
+couleurs des classes et des familiers, couleurs des symboles de raid (fond / texte).
+
+NOUVEAU EN 5.3
+Recharges du raid    = panneau « qui a quoi de prêt » : Suppression de la douleur, Esprit gardien, Main de sacrifice,
+                       Maîtrise des auras, Hymnes, Totem de vague de mana, Innervation, Héroïsme...
+                       Ligne « Rez combat » : Renaissance / Réanimation d'un allié prêtes + pierres d'âme posées.
+                       (/vp > Alertes et raid ; /vp cd pour afficher / cacher)
+Bordure rouge vive   = dégâts brutaux : le joueur vient de perdre plus de 30 % de sa vie en 1,5 s (réglable)
+Barres fines en haut = durée de vos HoTs sur les tanks (ou tous les cadres) ; rouge quand le HoT va expirer
+Bordure bleue        = vos cibles assignées (/vp > Assignations : « Bella = Tankor, Arthos », annonce au raid)
+Projecteur           = panneau de 10 cadres en plus pour des joueurs choisis et/ou vos cibles assignées
+Profil automatique   = selon la spé (double spé) ou la taille du groupe (/vp > Profils)
+Import / export      = partager un profil en texte à copier-coller (/vp > Profils)
+SharedMedia          = textures et polices de l'addon SharedMedia si installé (/vp > Apparence)
+
+NOUVEAU EN 5.3.3
+« Mort 1:23 »        = temps depuis la mort (aide à choisir la rez combat)
+« Rez... »           = quelqu'un ressuscite déjà ce joueur ; « Rez en attente » : il n'a plus qu'à accepter
+                       (les vôtres et celles réussies du groupe ; celles EN COURS des autres avec LibResComm-1.0)
+Bordure dorée        = le joueur que vous êtes en train de soigner (pendant l'incantation)
+Cible du boss        = cadre cliquable du joueur que le boss frappe (panneau Cible / Focus) ;
+                       option « Cible de la focalisation » : mettez le boss en focalisation, pour tous les combats
+
+NOUVEAU EN 5.4 : FENÊTRE DE CONFIGURATION (/vp)
+Accueil              = premiers pas (mode test, déplacer, clics, profils), état de l'addon, où trouver quoi
+Onglets par catégorie: Général, Apparence, Cadres et alertes, Commandes, Raid
+Recherche            = tapez un mot en haut à gauche (« bouclier », « portée », « son »...) : clic sur un résultat
+                       pour ouvrir l'onglet au bon endroit (le réglage s'illumine). Accents ignorés. Entrée = 1er résultat.
+« (?) »              = une explication s'affiche au survol
+Bas de la fenêtre    = Mode test et Déplacer / Verrouiller les cadres, toujours à portée de main
+
+NOUVEAU EN 5.6
+Tri « par rôle, en grille » = le raid garde sa forme (2 colonnes à 10, 5 à 25, 8 à 40) mais se remplit ligne par ligne :
+                       tanks en haut, puis soigneurs, puis DPS (ordre au choix). /vp > Apparence > Tri du raid.
+                       L'ancien tri par rôle reste disponible : « Par rôle, en blocs séparés ».
+                       Un joueur qui rejoint le groupe EN COMBAT n'apparaît qu'à la fin du combat (limite du jeu).
+Positions            = les cadres restent où vous les avez placés après une déconnexion, sur tous vos personnages
+                       (replacez-les une dernière fois après la mise à jour).
+
+NOUVEAU EN 5.6.1
+Molette / touches au survol = elles ne se désactivent plus sur un cadre resté sous la souris quand le groupe change
+                       (ex. Bouclier d'eau sur la molette qui ne partait plus par moments).
+
+NOUVEAU EN 5.6.2
+Changement de spé    = un joueur du groupe qui change de spé (DPS -> tank ou soigneur, ou l'inverse) est relu tout de
+                       suite : icône de rôle, tri par rôle et grille suivent en quelques secondes.
+                       Hors combat et à portée d'inspection (environ 28 m) ; sinon /vp role Nom tank|heal|dps.
+
+NOUVEAU EN 5.6.3
+Fenêtres affichées   = /vp > Panneaux > « Fenêtres d'information » : une case par fenêtre (Buffs, Liste de dispel,
+                       État du raid, Recharges du raid, Temps des gros sorts, Barre d'outils, Bouton Bijoux).
+                       Verrouiller ne fait que bloquer les positions ; option « Cacher les fenêtres vides » pour les masquer quand elles ne servent pas.
+Bouclier d'eau       = chaman : l'icône reste sur votre cadre avec le nombre de charges (orange à 1 charge) ;
+                       le cadre devient toujours gris quand le bouclier disparaît. /vp > Buffs pour désactiver.
+
+NOUVEAU EN 5.6.4
+Bouclier de terre    = chaman : après un Bouclier de terre posé sur vous-même puis remplacé par le Bouclier d'eau,
+                       votre cadre ne reste plus gris avec l'icône du Bouclier de terre.
+
+NOUVEAU EN 5.7 : RÉGLAGES PAR PERSONNAGE
+Chaque personnage    = garde ses propres réglages (apparence, positions, fenêtres affichées, alertes...) :
+                       changer une option sur un personnage ne touche plus les autres.
+Nouveau personnage   = démarre avec les réglages du dernier personnage joué, puis garde les siens.
+Copier               = /vp > Profils > « Réglages par personnage » : copier les réglages d'un autre personnage.
+Restent communs      = clics, touches et macros (rangés par classe et par spé) et les profils enregistrés.
+
+NOUVEAU EN 5.7.1 : PRÊTRE, PALADIN, DRUIDE
+Débuffs suivis       = un emplacement de HoT peut suivre un affaiblissement : Âme affaiblie (prêtre), Longanimité (paladin).
+Prêtre               = par défaut : Rénovation, Prière de guérison, Mot de pouvoir : Bouclier, Âme affaiblie, Égide divine, Grâce.
+Paladin              = par défaut : Guide de lumière, Bouclier saint, soin sur la durée d'Éclair lumineux, Longanimité.
+                       Les Tambours des rois oubliés comptent comme Bénédiction des rois.
+Druide               = Graine de vie ajoutée ; Tranquillité dans les recharges du raid.
+Déjà configuré ?     = vos emplacements enregistrés ne changent pas : choisissez les nouveaux sorts dans
+                       /vp > Icônes et HoTs > Sorts suivis (bouton « v »).
+
+NOUVEAU EN 5.8 : FENÊTRE DE CONFIGURATION REPENSÉE
+Une fonction = une page = tout ce qui la concerne au même endroit. Exemple : la page Dispel contient
+                       votre touche, l'affichage sur le cadre, les couleurs des types, le son et la fenêtre « À dissiper ».
+Accueil              = « Que voulez-vous faire ? » : un clic sur une tâche ouvre la bonne page et fait briller le réglage.
+Menu                 = 6 groupes : Démarrer, Soigner, Aides au soin, Affichage, Raid, Alertes.
+                       Petit point de couleur à droite d'une page = la fonction est activée.
+Essentiel / Tous     = en haut de la fenêtre. En mode Essentiel, les cartes « Avancé » sont repliées
+                       (jamais supprimées : un clic sur leur en-tête les ouvre).
+Cartes               = chaque groupe de réglages est une carte qu'on replie ou déplie d'un clic (+ / -).
+Liens                = « Dispel » » mène au réglage d'une autre page au lieu de le répéter.
+Vues d'ensemble      = « Fenêtres à l'écran » et « Sons et alertes » listent tout, avec un lien vers la page de chaque fonction.
+Recherche            = comprend des synonymes : « purifier », « décurse », « cleanse » trouvent Dispel.
+Lisibilité           = Style et couleurs > « Taille de cette fenêtre » (70 à 140 %).
+Doublons supprimés   = chaque réglage n'existe plus qu'à un seul endroit ; décalages des icônes en px partout.
+Vos réglages         = rien à refaire : tous les réglages enregistrés restent valides.
+Charges              = chiffre des charges (Bouclier de terre, Prière de guérison) vert à 3 charges et plus
+                       (il était gris clair à 4 et plus : un bouclier neuf semblait éteint), jaune à 2, rouge à 1.
+Tank non reconnu     = l'accueil et la page Buffs et rappels le signalent ; bouton « Ma cible est un tank » (= /vp tank).
+Sort d'un autre joueur = Bouclier de terre, Épines, Gardien de peur ne se cumulent pas : un tank qui porte déjà celui
+                       d'un autre chaman / druide / prêtre n'est plus grisé. Un autre tank sans rien reste à couvrir.
+Gardien de peur      = une seule cible (3 min de recharge) ; plus de cadre gris tant que le sort est en recharge.
+Plusieurs paladins   = votre Guide de lumière est bien reconnu même si un autre paladin a posé le sien sur le même tank.
+Dispel sans cadres   = cadres de soin cachés (commande cadres) : la liste « À dissiper » et le son fonctionnent encore
+                       (avant, plus rien n'était détecté sans les cadres).
+Bijoux automatiques  = plus de message « L'objet n'est pas encore prêt » à chaque clic de soin quand les bijoux sont en recharge.
+Rapport de mort      = les morts instantanées (sans dégâts) sont bien expliquées, au lieu du coup précédent.
+Import de profil     = vérifié en profondeur (couleurs, tailles bornées, emplacements de HoTs) : un texte abîmé ne casse plus l'addon.
+Autres débuffs       = Rassasié, Épuisement, Âme affaiblie, Longanimité, Récemment bandé, Hypothermie, Déserteur ne s'affichent plus.
+Soin de zone         = distances réelles : l'addon apprend l'échelle de la carte (portée de votre soin, distances de
+                       duel et de suivi) puis teinte la cible qui a le plus de blessés autour d'elle (Cercle de soins,
+                       Croissance sauvage : 15 m ; Salve de guérison : 12,5 m). Sinon, ancienne méthode par groupe.
+Petits cadres        = un carré par joueur (comme Decursive), coloré s'il a un débuff que VOTRE classe peut retirer.
+                       Clic gauche : Dispel 1, clic droit : Dispel 2, clic milieu : cibler. Fonctionne en combat.
+                       Par défaut : seulement quand les cadres de soin sont cachés (page Dispel). Le dispel par clic
+                       sur les cadres de soin ne change pas.
+Recharges partagées  = les joueurs VuhPlus s'envoient leurs vraies recharges (talents et glyphes compris) :
+                       le panneau indique combien sont « exacts ». Désactivable (page Recharges et annonces).
+Nouvelles recharges  = Infusion de puissance, Zone anti-magie, Intervention divine.
+Performances         = surveillance des buffs revenue à une recherche directe (10 fois moins d'appels au jeu
+                       qu'en 5.8 bêta), rôle relu sur un changement d'aura seulement pour druides et DK,
+                       moins de chaînes de texte créées à chaque image.
+Alertes              = un cadre qui change de joueur ne garde plus la mémoire « déjà signalé » du précédent.
+
+NOUVEAU EN 5.8.1 : CORRECTIFS ET PERFORMANCES
+Chaman               = Arme Viveterre et montant des boucliers : les deux lectures d'infobulle ne se mélangent plus
+                       (cadre qui restait gris malgré l'enchantement, ou barre de bouclier fausse).
+Écran de chargement  = plus de gel du jeu juste après un écran de chargement ou une longue saccade.
+Liste « À dissiper » = ne clignote plus en raid 40 (un joueur disparaissait un instant de la liste et des petits cadres).
+Mémoire              = les joueurs partis et les monstres ciblés ne sont plus gardés en mémoire toute la soirée.
+Connexion            = changement des clics bien plus léger (les groupes ne se replacent plus à chaque réglage écrit).
+Changement de cible  = d'un boss, de votre cible ou de la focalisation : seuls les cadres Cible / Focus sont redessinés.
+Fenêtre /vp          = ne plante plus à l'ouverture après un /reload (« Usage: VuhPlusConfig:SetScale ») ;
+                       « Taille de cette fenêtre » et le mode Essentiel / Tous sont de nouveau retenus.
+
+NOUVEAU EN 5.8.2
+Nouveaux HoTs suivis = à choisir dans /vp > Icônes et HoTs (bouton « v » d'un emplacement) :
+                       prêtre : Rénovation du Puits de lumière, Glyphe de prière de soins, Soin béni (T10) ;
+                       chaman : Soin chaîné (T10 4 pièces) ; paladin : Gaine de lumière.
+Crédit               = « par BellaHealFr » de retour en haut de la fenêtre /vp et sur le bouton de la minicarte.
+
+NOUVEAU EN 5.8.3 : AFFICHAGE DES HOTS
+Icônes des HoTs      = Viveterre, Égide divine, Grâce, Graine de vie, Âme affaiblie, Longanimité, Force d'âme ancestrale
+                       et les nouveaux HoTs ont maintenant leur icône dans les options, l'éditeur de placement
+                       et le mode test (avant : icône vide ou « ? » pour les sorts absents du grimoire).
+Puits de lumière     = sa Rénovation s'affiche que l'emplacement soit réglé sur « Les miens » ou « Des autres »
+                       (le jeu ne donne pas de lanceur pour ce sort).
+Mode test            = seuls les vrais sorts à charges (Bouclier de terre, Prière de guérison) affichent un compteur.
+
+NOUVEAU EN 5.8.4
+Appel (ready check)  = plus de croix sur tout le monde quand vous n'êtes ni chef ni assistant (le jeu ne vous envoie pas
+                       les réponses : rien n'est affiché au lieu d'une croix). Réponses bien lues, chef compté prêt,
+                       « Pas prêts » et « Sans réponse » séparés, icônes retirées dès l'entrée en combat.
+Icônes de tank       = gardées après une mort ou un wipe (druide, chevalier de la mort, guerrier, paladin) : plus
+                       d'inspection des morts / fantômes, réponses d'inspection fausses rejetées.
+Détection des rôles  = par les sorts de talent lancés (Dévastation = guerrier tank, Pénitence = prêtre soigneur...),
+                       la rage / l'énergie du druide, la Fureur vertueuse, la Forme d'ombre ; chevalier de la mort par sa
+                       présence, sans inspection.
+Couronne             = chef et assistants du raid ; position dans Placement des icônes (« Chef / assistant »).
+« Boit 45% »         = joueur en train de boire hors combat, avec sa mana.
+Surbrillance         = le cadre survolé s'éclaircit. Barres de vie animées en option (Style et couleurs).
+Défensifs            = + Renvoi de sort, Intervention, Zone anti-magie, Intervention divine.
+Verrouillage         = ne fait plus que bloquer les positions ; option « Cacher les fenêtres vides » (Fenêtres à l'écran).
+Cadres Blizzard      = « Masquer les cadres de groupe Blizzard » tient même après une invitation.
+Performances         = rôles relus 4 fois par seconde au plus, montant des boucliers 2 fois par seconde, écriture des
+                       clics sécurisée à la connexion.
+
+NOUVEAU EN 5.8.5
+Appel (ready check)  = les réponses s'affichent sur TOUS les joueurs même si vous n'êtes ni chef ni assistant :
+                       chaque joueur VuhPlus annonce sa réponse, et un chef / assistant VuhPlus relaie celles que le
+                       serveur lui envoie (en 3.3.5, le serveur ne les donne qu'au chef et aux assistants).
+Annonces discrètes   = une seule ligne au groupe, seulement pour les sorts de raid (Héroïsme, Renaissance, Totem de
+                       vague de mana, hymnes, Maîtrise des auras, Sacrifice divin) et seulement en instance ; les sorts
+                       sur un joueur (Innervation, Suppression...) et « de nouveau disponible » restent dans votre chat.
+                       Plus de décompte par défaut, au plus un message toutes les 3 s, aucun message privé.
+                       Barres des autres soigneurs : seulement leurs sorts de raid. Tout se règle dans Recharges et annonces.
+
+NOUVEAU EN 5.8.6
+Tri par rôle         = un druide tank qui passe un instant en félin (ou un chevalier de la mort qui change de
+                       présence) ne change plus de bloc : l'autre forme ne compte que si elle est gardée 30 s
+                       d'affilée en combat. Changement de spé : la nouvelle forme compte tout de suite.
+
+NOUVEAU EN 5.9.0
+Rôle partagé         = chaque joueur VuhPlus envoie la spé de ses talents au groupe : son rôle est connu tout de suite,
+                       sans inspection ni distance, et un changement de spé suit aussitôt. Les joueurs sans VuhPlus
+                       sont toujours inspectés. Réglage : /vp > Indicateurs > « Partager ma spé avec les joueurs VuhPlus ».
+Rapport de mort      = en groupe de 5, seul le chef l'annonce au groupe (avant : chaque joueur VuhPlus le répétait).
+Performances         = moins de mémoire utilisée par la mise à jour des auras des cadres.

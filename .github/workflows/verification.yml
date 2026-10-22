@@ -1,0 +1,52 @@
+name: Vérification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verifier:
+    name: Syntaxe, fichiers, versions, licence et banc
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installer Lua 5.1 (version du client 3.3.5)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lua5.1
+
+      - name: Syntaxe Lua 5.1
+        run: luac5.1 -p *.lua tests/*.lua
+
+      - name: Fichiers déclarés dans VuhPlus.toc
+        run: |
+          grep -E '\.(lua|xml)$' VuhPlus.toc | tr -d '\r' | while read -r f; do
+            [ -f "$f" ] || { echo "::error::Fichier déclaré mais absent : $f"; exit 1; }
+          done
+          for f in *.lua; do
+            grep -qxF "$f" <(tr -d '\r' < VuhPlus.toc) || { echo "::error::Fichier absent du .toc : $f"; exit 1; }
+          done
+
+      - name: Cohérence des numéros de version
+        run: |
+          core=$(sed -n 's/.*VP\.version = "\([^"]*\)".*/\1/p' Core.lua)
+          toc=$(sed -n 's/^## Version: *\([^[:space:]]*\).*/\1/p' VuhPlus.toc | tr -d '\r')
+          echo "Core.lua : $core, VuhPlus.toc : $toc"
+          [ -n "$core" ] && [ "$core" = "$toc" ] || { echo "::error::Versions différentes entre Core.lua et VuhPlus.toc"; exit 1; }
+          grep -qx "## $core" CHANGELOG.md || { echo "::error::Aucune section « $core » dans CHANGELOG.md"; exit 1; }
+
+      - name: En-tête de licence dans chaque fichier Lua
+        run: |
+          for f in *.lua tests/*.lua; do
+            head -n 1 "$f" | grep -q 'Copyright (C) .* BellaHealFr' || { echo "::error::En-tête de licence manquant : $f"; exit 1; }
+          done
+
+      - name: Installer Python et lupa (Lua 5.1 du banc)
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Banc de simulation
+        run: |
+          pip install --quiet lupa
+          python tests/run.py . tests/scenario_*.lua

@@ -1,0 +1,6 @@
+<Bindings>
+	<Binding name="CLICK VuhPlusTrinketButton:LeftButton" header="VUHPLUS">
+	</Binding>
+	<Binding name="CLICK VuhPlusSmartBuff:LeftButton">
+	</Binding>
+</Bindings>
