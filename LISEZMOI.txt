@@ -1,4 +1,4 @@
-VuhPlus 5.9.0 - Cadres de raid pour soigneurs (WoW 3.3.5 WotLK)
+VuhPlus 5.9.1 - Cadres de raid pour soigneurs (WoW 3.3.5 WotLK)
 Par BellaHealFr - inspiré de VuhDo
 
 INSTALLATION
@@ -280,3 +280,9 @@ Rôle partagé         = chaque joueur VuhPlus envoie la spé de ses talents au 
                        sont toujours inspectés. Réglage : /vp > Indicateurs > « Partager ma spé avec les joueurs VuhPlus ».
 Rapport de mort      = en groupe de 5, seul le chef l'annonce au groupe (avant : chaque joueur VuhPlus le répétait).
 Performances         = moins de mémoire utilisée par la mise à jour des auras des cadres.
+
+NOUVEAU EN 5.9.1
+Chevalier de la mort = un DK qui passe de tank à DPS (ou l'inverse) change de rôle dès sa nouvelle présence prise hors
+                       combat : icône et tri par rôle suivent. En combat, la règle des 30 s reste.
+Grille par rôle      = les colonnes restent pleines, seule la dernière reçoit le reste : 11 joueurs = 5 / 5 / 1
+                       (avant : 4 / 4 / 3), 26 joueurs = cinq colonnes de 5 et une de 1. Le mode test suit la même forme.

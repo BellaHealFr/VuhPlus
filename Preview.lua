@@ -119,7 +119,7 @@ function PV:Layout()
 	local grid = P:UseGrid()
 	local groups = P:UseGroups() and not grid
 	-- grille par rôle : remplie ligne par ligne, sans titres
-	local gridCols = math.max(1, math.ceil(self.size / math.max(1, d.perColumn)))
+	local gridCells = grid and P:GridCells(self.size, math.max(1, d.perColumn))
 	for g = 1, 8 do self.titles[g]:Hide() end
 	for i, b in ipairs(self.buttons) do
 		if i <= self.size then
@@ -137,8 +137,7 @@ function PV:Layout()
 					t:Show()
 				end
 			elseif grid then
-				local col = (i - 1) % gridCols
-				local row = math.floor((i - 1) / gridCols)
+				local row, col = gridCells[i][1], gridCells[i][2]
 				b:SetPoint("TOPLEFT", self.holder, "TOPLEFT", d.padX + col * (d.width + d.xGap), -d.padY - row * (fh + d.yGap))
 			else
 				local col = math.floor((i - 1) / d.perColumn)

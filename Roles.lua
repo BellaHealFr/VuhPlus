@@ -181,6 +181,13 @@ function R:AuraRole(unit, guid, kind)
 		if seen then auraRole[guid] = seen; return seen end
 		return "DAMAGER"
 	end
+	-- Chevalier de la mort hors combat : il change de présence exprès (nouvelle spé, tank qui passe DPS) et n'a
+	-- pas de forme de voyage, la nouvelle présence compte tout de suite. Avant : hors combat elle n'était jamais
+	-- retenue, un DK passé de tank à DPS (ou l'inverse) restait à son ancienne place.
+	if kind == "DK" and seen and seen ~= known and not UnitAffectingCombat(unit) then
+		auraRole[guid], auraCand[guid] = seen, nil
+		return seen
+	end
 	-- rôle déjà connu : une autre forme ne compte que tenue EN COMBAT pendant AURA_HOLD secondes d'affilée.
 	-- Avant : un druide tank qui passait félin un instant (déplacement entre deux packs, Ruée...) passait DPS
 	-- et changeait de bloc dans le tri par rôle.
@@ -421,8 +428,11 @@ function R:OnLogin()
 		if band(srcFlags or 0, 0x7) == 0 or band(srcFlags or 0, 0x400) == 0 then return end
 		R:Prove(srcGUID, spellName)
 	end)
-	-- mon propre changement de spé : ma preuve ne vaut plus
-	VP:On("ACTIVE_TALENT_GROUP_CHANGED", function() local g = UnitGUID("player"); if g then R.proof[g] = nil end end)
+	-- mon propre changement de spé : ma preuve ne vaut plus, ni le rôle retenu par ma forme / ma présence
+	VP:On("ACTIVE_TALENT_GROUP_CHANGED", function()
+		local g = UnitGUID("player")
+		if g then R.proof[g] = nil; auraRole[g] = nil; auraCand[g] = nil end
+	end)
 	for _, id in ipairs(DPS_PRESENCE_IDS) do
 		local n = GetSpellInfo(id)
 		if n then dpsPresenceNames[n] = true end

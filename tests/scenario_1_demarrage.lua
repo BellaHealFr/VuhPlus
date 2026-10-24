@@ -8,7 +8,7 @@ for _, n in ipairs({ "Dissipation de la magie", "Soins rapides", "Soins supérie
 BOOT(me, nil)
 CHECK("chargement des 27 fichiers et démarrage sans erreur", #ERRORS == 0, ERRORS[1])
 CHECK("message de bienvenue affiché", PRINTS[1] and PRINTS[1]:find("chargé") ~= nil, PRINTS[1])
-CHECK("version 5.9.0", VuhPlus.version == "5.9.0", VuhPlus.version)
+CHECK("version 5.9.1", VuhPlus.version == "5.9.1", VuhPlus.version)
 
 local classes = { "WARRIOR", "DRUID", "PALADIN", "SHAMAN", "MAGE", "ROGUE", "HUNTER", "WARLOCK", "DEATHKNIGHT" }
 local raid = { me }

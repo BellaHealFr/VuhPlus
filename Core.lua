@@ -4,7 +4,7 @@
 -- VuhPlus - Noyau : configuration, profils, événements, file hors-combat, commandes
 VuhPlus = {}
 local VP = VuhPlus
-VP.version = "5.9.0"
+VP.version = "5.9.1"
 
 BINDING_HEADER_VUHPLUS = "VuhPlus"
 _G["BINDING_NAME_CLICK VuhPlusTrinketButton:LeftButton"] = "Utiliser les bijoux"

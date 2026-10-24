@@ -1,5 +1,11 @@
 # Historique des versions
 
+## 5.9.1
+
+### Corrections
+- **Chevalier de la mort qui passe de tank à DPS (ou l'inverse).** Hors combat, sa nouvelle présence compte tout de suite : icône de rôle et tri par rôle suivent. Avant, elle n'était retenue qu'après 30 secondes de combat, et le DK restait à son ancienne place. En combat, la règle des 30 secondes reste (une présence impie le temps d'un déplacement ne change rien). Votre propre changement de spé remet aussi votre rôle à zéro.
+- **Grille par rôle : les colonnes restent pleines.** À 11 joueurs, la grille fait 5 / 5 / 1 au lieu de 4 / 4 / 3. Même chose en raid 25 et plus : 26 joueurs = cinq colonnes de 5 et une de 1. Le mode test suit la même forme.
+
 ## 5.9.0
 
 ### Ajouts

@@ -3,7 +3,7 @@
 ## Notes: Cadres de raid modernes pour soigneurs inspirés de VuhDo : clic-soin, touches au survol, dispel, débuffs de boss, buffs, soins entrants, soin de zone, bijoux.
 ## Author: BellaHealFr
 ## X-License: GPL-3.0-only (voir LICENSE et NOTICE.md)
-## Version: 5.9.0
+## Version: 5.9.1
 ## SavedVariables: VuhPlusDB
 ## OptionalDeps: LibHealComm-4.0, LibStub, LibSharedMedia-3.0, SharedMedia, LibResComm-1.0
 

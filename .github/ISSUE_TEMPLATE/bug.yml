@@ -27,7 +27,7 @@ body:
     attributes:
       label: Version de VuhPlus
       description: Affichée en haut de la fenêtre /vp et dans l'infobulle du bouton de la minicarte.
-      placeholder: "5.9.0"
+      placeholder: "5.9.1"
     validations:
       required: true
 

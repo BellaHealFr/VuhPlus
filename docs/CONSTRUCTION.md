@@ -2,7 +2,7 @@
 
 Ce document décrit comment VuhPlus est construit : ses objectifs, son architecture, les algorithmes de chaque module et les raisons des choix faits. Il s'adresse à qui veut comprendre le code, le vérifier ou y contribuer.
 
-Version décrite : **5.9.0**.
+Version décrite : **5.9.1**.
 
 ## Sommaire
 
@@ -167,7 +167,7 @@ Les panneaux sont des ancres déplaçables qui portent des en-têtes sécurisés
 | Par groupe | 8 en-têtes, un par groupe (`groupFilter`), avec titre ; groupes vides rangés à la fin en mode compact |
 | Par classe, par nom | un seul en-tête en colonnes |
 | Par rôle, en blocs | les 3 premiers en-têtes, chacun filtré par une liste de noms (`nameList`) : Tanks, Soigneurs, DPS dans l'ordre choisi |
-| Par rôle, en grille | la grille a la forme du tri par groupe et se remplit ligne par ligne ; chaque ligne est découpée en morceaux d'un seul rôle, un en-tête par morceau (8 au plus, la grille s'élargit sinon) |
+| Par rôle, en grille | la grille a la forme du tri par groupe (colonnes pleines, seule la dernière reçoit le reste : 5 / 5 / 1 à 11 joueurs) et se remplit ligne par ligne ; chaque ligne est découpée en morceaux d'un seul rôle, un en-tête par morceau (8 au plus, la grille s'élargit sinon) |
 
 Les listes de noms sont reconstruites hors combat : quand un rôle change, quand le groupe change, et toutes les 5 secondes hors combat (forme, présence, spé), avec une nouvelle mise en page seulement si le contenu des listes a changé. L'ordre exact des joueurs dans un en-tête sécurisé n'est pas réglable en 3.3.5, d'où les listes de noms.
 

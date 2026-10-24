@@ -253,6 +253,22 @@ local function clearChildren(h)
 	end
 end
 
+-- Cases de la grille par rôle, dans l'ordre de remplissage (ligne par ligne) : { ligne, colonne } en partant de 0.
+-- Les colonnes sont pleines (rows cases), seule la dernière reçoit le reste, comme le tri par groupe :
+-- 11 joueurs à 5 par colonne = 5 / 5 / 1. Avant : la grille était équilibrée (4 / 4 / 3), comme 3 groupes.
+function P:GridCells(total, rows)
+	rows = math.max(1, math.min(rows, total))
+	local cols = math.max(1, math.ceil(total / rows))
+	local lastH = total - rows * (cols - 1)   -- hauteur de la dernière colonne
+	local cells = {}
+	for row = 0, rows - 1 do
+		for col = 0, cols - 1 do
+			if col < cols - 1 or row < lastH then cells[#cells + 1] = { row, col } end
+		end
+	end
+	return cells
+end
+
 -- Grille par rôle. L'ordre exact des joueurs n'est pas réglable sur un en-tête sécurisé de la 3.3.5 :
 -- chaque ligne est donc découpée en morceaux d'un seul rôle, un en-tête par morceau (8 au plus).
 function P:ApplyGridHeaders()
@@ -268,22 +284,23 @@ function P:ApplyGridHeaders()
 	end
 	local total = #seq
 	-- « joueurs par colonne » donne la hauteur de la grille : 5 = 2 colonnes à 10 joueurs, 5 colonnes à 25
-	local cols = math.max(1, math.ceil(total / math.max(1, d.perColumn)))
-	local segs
+	local rows = math.max(1, math.min(d.perColumn, total))
+	local segs, cells
 	repeat
 		segs = {}
+		cells = self:GridCells(total, rows)
 		local cur
 		for i = 1, total do
-			local col = (i - 1) % cols
+			local row, col = cells[i][1], cells[i][2]
 			if not cur or col == 0 or roleOf[i] ~= cur.role then
-				cur = { role = roleOf[i], row = math.floor((i - 1) / cols), col = col, names = {} }
+				cur = { role = roleOf[i], row = row, col = col, names = {} }
 				segs[#segs + 1] = cur
 			end
 			cur.names[#cur.names + 1] = seq[i]
 		end
 		-- trop de morceaux pour les 8 en-têtes (grille très haute) : on élargit la grille
-		if #segs > 8 then cols = cols + 1 end
-	until #segs <= 8
+		if #segs > 8 then rows = rows - 1 end
+	until #segs <= 8 or rows < 1
 	local fh = VP.Frames:FrameHeight()
 	for i = 1, 8 do
 		local g, s = self.groups[i], segs[i]
@@ -310,7 +327,7 @@ function P:ApplyGridHeaders()
 		end
 		self.titles[i]:Hide()
 	end
-	self.gridRows = total > 0 and math.ceil(total / cols) or 0
+	self.gridRows = total > 0 and rows or 0
 end
 
 function P:ApplyRoleHeaders()
