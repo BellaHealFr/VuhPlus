@@ -11,6 +11,7 @@
 ![Dépendances](https://img.shields.io/badge/d%C3%A9pendances-aucune-success)
 ![Langue](https://img.shields.io/badge/langue-fran%C3%A7ais-informational)
 ![Licence](https://img.shields.io/badge/licence-GPL--3.0-blue)
+[![Téléchargements](https://img.shields.io/github/downloads/BellaHealFr/VuhPlus/total?label=t%C3%A9l%C3%A9chargements&color=success)](../../releases)
 
 </div>
 
@@ -218,6 +219,15 @@ L'historique des versions est dans **[CHANGELOG.md](CHANGELOG.md)**.
 Les signalements de bugs et les suggestions sont les bienvenus dans l'onglet **Issues**. Pour un problème de cadres qui disparaissent, le journal de `/vp diag` aide beaucoup.
 
 Pour proposer une modification du code, lisez **[CONTRIBUTING.md](CONTRIBUTING.md)**.
+
+## Retrouvez mes projets pour WotLK 3.3.5
+
+Tous mes addons sont écrits pour le client 3.3.5a, en français et sans dépendance. Ils fonctionnent très bien ensemble.
+
+| Addon | Pour quoi faire | Version | Téléchargements |
+|---|---|---|---|
+| **[Zénith](https://github.com/BellaHealFr/Zenith)** | Compteur de combat : dégâts, soins, boucliers, les mêmes chiffres pour tout le groupe, relecture des combats, records par boss. | [![Version](https://img.shields.io/github/v/release/BellaHealFr/Zenith?label=&color=1e90ff)](https://github.com/BellaHealFr/Zenith/releases/latest) | [![Téléchargements](https://img.shields.io/github/downloads/BellaHealFr/Zenith/total?label=&color=success)](https://github.com/BellaHealFr/Zenith/releases) |
+| **[VuhPlus](https://github.com/BellaHealFr/VuhPlus)** | Cadres de raid pour soigneurs : soin au clic, dispel, débuffs de boss, rôles reconnus, recharges du raid. | [![Version](https://img.shields.io/github/v/release/BellaHealFr/VuhPlus?label=&color=1e90ff)](https://github.com/BellaHealFr/VuhPlus/releases/latest) | [![Téléchargements](https://img.shields.io/github/downloads/BellaHealFr/VuhPlus/total?label=&color=success)](https://github.com/BellaHealFr/VuhPlus/releases) |
 
 ## Licence
 
